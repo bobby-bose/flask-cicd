@@ -32,9 +32,10 @@ jobs:
         # Add your test commands here
         echo "Tests run successfully!"
 
-    - name: Deploy to Heroku
+    - name: Deploy to Netlify
       env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       run: |
-        git remote add heroku https://git.heroku.com/your-heroku-app.git
-        git push heroku master
+        pip install netlify-cli
+        netlify deploy --dir=. --prod
